@@ -70,6 +70,20 @@ git -c http.postBuffer=524288000 clone https://github.com/nousresearch/hermes-ag
 git -c http.version=HTTP/1.1 clone --depth 1 https://github.com/nousresearch/hermes-agent.git
 ```
 
+### 4. 模块导入错误
+
+**问题：**
+```
+ModuleNotFoundError: No module named 'hermes_cli'
+```
+
+**原因：** 使用浅克隆（--depth 1）导致 pyproject.toml 等关键配置文件缺失
+
+**解决方案：** 使用完整克隆而不使用浅克隆
+```bash
+git -c http.version=HTTP/1.1 clone https://github.com/nousresearch/hermes-agent.git ~/.hermes/hermes-agent
+```
+
 ## 系统要求检查清单
 
 - [x] macOS 操作系统
@@ -77,8 +91,8 @@ git -c http.version=HTTP/1.1 clone --depth 1 https://github.com/nousresearch/her
 - [x] Python 3.11（通过 uv 安装）
 - [x] Git
 - [x] Node.js
-- [ ] ripgrep（需要手动安装：`brew install ripgrep`）
-- [ ] ffmpeg（需要手动安装：`brew install ffmpeg`）
+- [x] ripgrep（通过 Homebrew 安装）
+- [x] ffmpeg（通过 Homebrew 安装）
 
 ## 完整安装步骤（推荐）
 
@@ -119,4 +133,16 @@ source ~/.zshrc  # 或 source ~/.bashrc
 4. **Homebrew：** 系统检测到 Homebrew 未安装，需要手动安装以获取 ripgrep 和 ffmpeg
 
 ## 安装日期
-2026-04-17
+- 初次尝试：2026-04-17
+- 成功安装：2026-04-18
+
+## 最终安装版本
+- Hermes Agent: v0.10.0
+- Python: 3.11.15
+- OpenAI SDK: 2.24.0
+
+## 成功安装的关键步骤
+1. 使用 `git -c http.version=HTTP/1.1 clone --depth 1` 避免 HTTP/2 问题
+2. 使用浅克隆减少下载时间
+3. 通过 `uv sync` 安装 Python 依赖
+4. 通过 Homebrew 安装系统依赖（ripgrep、ffmpeg）
