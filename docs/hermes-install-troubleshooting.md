@@ -118,12 +118,28 @@ brew install ripgrep ffmpeg
 将以下内容添加到 `~/.zshrc` 或 `~/.bashrc`：
 ```bash
 export PATH="$HOME/.local/bin:$PATH"
+alias hermes="cd ~/.hermes/hermes-agent && uv run hermes"
 ```
 
 然后执行：
 ```bash
 source ~/.zshrc  # 或 source ~/.bashrc
 ```
+
+## 使用 Hermes Agent
+
+配置完成后，你可以通过以下方式启动 Hermes：
+
+1. **使用全局别名（推荐）**：
+   ```bash
+   hermes
+   ```
+
+2. **直接进入项目目录运行**：
+   ```bash
+   cd ~/.hermes/hermes-agent
+   uv run hermes
+   ```
 
 ## 注意事项
 
